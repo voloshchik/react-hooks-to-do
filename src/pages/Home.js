@@ -5,7 +5,7 @@ import { Notes } from '../components/Notes';
 import { FirebaseContext } from '../context/alert/firebase/firebaseContext';
 
 export const Home = () => {
-  const { notes, loading, fetchNotes } = useContext(FirebaseContext);
+  const { notes, loading, fetchNotes, removeNote } = useContext(FirebaseContext);
   useEffect(() => {
     fetchNotes();
 
@@ -16,7 +16,7 @@ export const Home = () => {
     <div>
       <Form />
       <hr />
-      {loading ? <Loader /> : <Notes notes={notes} />}
+      {loading ? <Loader /> : <Notes notes={notes} onRemove={removeNote} />}
     </div>
   );
 };

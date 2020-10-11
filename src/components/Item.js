@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Item = ({ note }) => {
+export const Item = ({ note, onRemove }) => {
   return (
     <>
       <li className='list-group-item note'>
@@ -8,7 +8,11 @@ export const Item = ({ note }) => {
           <strong> {note.title}</strong>
           <small>{new Date().toLocaleDateString()}</small>
         </div>
-        <button type='button' className='btn btn-outline-danger btn-sm'>
+        <button
+          type='button'
+          onClick={() => onRemove(note.id)}
+          className='btn btn-outline-danger btn-sm'
+        >
           &times;
         </button>
       </li>
