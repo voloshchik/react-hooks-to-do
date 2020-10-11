@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Form } from '../components/Form';
+import { Loader } from '../components/Loader';
 import { Notes } from '../components/Notes';
+import { FirebaseContext } from '../context/alert/firebase/firebaseContext';
 
 export const Home = () => {
-  const notes = Array(4)
-    .fill('')
-    .map((_, i) => ({ id: i, title: i + 1 }));
+  const { notes, loading, fetchNotes } = useContext(FirebaseContext);
+  useEffect(() => {
+    fetchNotes();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   console.log('notes', notes);
   return (
     <div>
       <Form />
       <hr />
-      <Notes notes={notes} />
+      {loading ? <Loader /> : <Notes notes={notes} />}
     </div>
   );
 };
